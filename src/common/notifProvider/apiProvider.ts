@@ -128,10 +128,12 @@ export class ApiProvider extends NotifProviderRoot {
   }
 
   private async formatPayload() {
-    // TODO
-    if ((this.apiUrl || "").includes("loki/api/v1/push") || (this.apiUrl || "").includes("datadoghq")) {
+    if ((this.apiUrl || "").includes("loki/api/v1/push")) {
       await this.formatPayloadLoki();
       return;
+    }
+    else if ((this.apiUrl || "").includes("datadoghq")) {
+      // TODO
     }
     this.payloadFormatted = this.payload;
   }
