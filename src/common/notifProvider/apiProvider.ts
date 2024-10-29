@@ -193,7 +193,7 @@ export class ApiProvider extends NotifProviderRoot {
     else if (getEnvVar("DATADOG_API_KEY") != null) {
       uxLog(this, c.yellow(`[sendToApi] DD-API-KEY: ${getEnvVar("DATADOG_API_KEY")}`));
       axiosConfig.headers = { 
-        'DD-API-KEY': `${getEnvVar("DATADOG_API_KEY")}`, 
+        'DD-API-KEY': getEnvVar("DATADOG_API_KEY"), 
         'Content-Type': 'application/json' 
       };
     }
@@ -271,7 +271,7 @@ export class ApiProvider extends NotifProviderRoot {
     else if (getEnvVar("DATADOG_API_KEY") != null) {
       uxLog(this, c.yellow(`[sendToMetricsApi] DD-API-KEY: ${getEnvVar("DATADOG_API_KEY")}`));
       axiosConfig.headers = { 
-        'DD-API-KEY': `${getEnvVar("DATADOG_API_KEY")}`, 
+        'DD-API-KEY': getEnvVar("DATADOG_API_KEY"), 
         'Content-Type': 'application/json' 
       };
     }
