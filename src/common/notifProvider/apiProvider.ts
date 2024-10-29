@@ -128,7 +128,8 @@ export class ApiProvider extends NotifProviderRoot {
   }
 
   private async formatPayload() {
-    if ((this.apiUrl || "").includes("loki/api/v1/push")) {
+    // TODO
+    if ((this.apiUrl || "").includes("loki/api/v1/push") || (this.apiUrl || "").includes("datadoghq")) {
       await this.formatPayloadLoki();
       return;
     }
@@ -187,6 +188,10 @@ export class ApiProvider extends NotifProviderRoot {
     // Bearer token
     else if (getEnvVar("NOTIF_API_BEARER_TOKEN") != null) {
       axiosConfig.headers = { Authorization: `Bearer ${getEnvVar("NOTIF_API_BEARER_TOKEN")}` };
+    }
+    // Datadog API Key
+    else if (getEnvVar("DATADOG_API_KEY") != null) {
+      axiosConfig.headers = { 'DD-API-KEY': getEnvVar("DATADOG_API_KEY") };
     }
     // POST message
     try {
@@ -257,6 +262,10 @@ export class ApiProvider extends NotifProviderRoot {
     // Bearer token
     else if (getEnvVar("NOTIF_API_METRICS_BEARER_TOKEN") != null) {
       axiosConfig.headers = { Authorization: `Bearer ${getEnvVar("NOTIF_API_METRICS_BEARER_TOKEN")}` };
+    }
+    // Datadog API Key
+    else if (getEnvVar("DATADOG_API_KEY") != null) {
+      axiosConfig.headers = { 'DD-API-KEY': getEnvVar("DATADOG_API_KEY") };
     }
     // POST message
     try {
