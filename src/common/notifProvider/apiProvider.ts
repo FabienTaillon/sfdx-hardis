@@ -240,7 +240,7 @@ export class ApiProvider extends NotifProviderRoot {
     }
     // POST message
     try {
-      uxLog(this, c.yellow(`PAYLOAD: ${this.payloadFormatted}`));
+      uxLog(this, c.yellow(`PAYLOAD: ${JSON.stringify(this.payloadFormatted)}`));
       const axiosResponse = await axios.post(this.apiUrl || "", this.payloadFormatted, axiosConfig);
       const httpStatus = axiosResponse.status;
       if (httpStatus > 200 && httpStatus < 300) {
