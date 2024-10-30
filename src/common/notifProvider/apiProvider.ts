@@ -179,6 +179,7 @@ export class ApiProvider extends NotifProviderRoot {
 
   // TODO
   private async formatPayloadDatadog() {
+    /*
     const currentTimeNanoseconds = Date.now() * 1000 * 1000;
     const payloadCopy = Object.assign({}, this.payload);
     delete payloadCopy.data;
@@ -205,14 +206,41 @@ export class ApiProvider extends NotifProviderRoot {
         uxLog(this, c.grey(`[ApiProvider] Truncated _logBodyText to 100 to avoid Loki entry max size reached (initial size: ${bodyBytesLen} bytes)`));
       }
     }
+    */
     this.payloadFormatted = {
-      streams: [
+      "series": [
         {
-          stream: payloadCopy,
-          values: [[`${currentTimeNanoseconds}`, payloadDataJson]],
-        },
-      ],
+          "source_type_name": "Salesforce",
+          "metric": "ApexTestsCodeCoverage",
+          "type": 0,
+          "points": [
+            {
+                "timestamp": 1730214209,
+                "value": 75
+            },
+            {
+              "timestamp": 1730300390,
+              "value": 100
+            }
+          ],
+          "resources": [
+            {
+              "name": "texe-2b-dev-ed",
+              "type": "host"
+            }
+          ]
+        }
+      ]
     };
+
+    /*
+    streams: [
+      {
+        stream: payloadCopy,
+        values: [[`${currentTimeNanoseconds}`, payloadDataJson]],
+      },
+    ],
+    */
   }
 
   // Call remote API
